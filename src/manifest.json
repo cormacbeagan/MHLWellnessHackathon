@@ -19,7 +19,8 @@
     "default_popup": "index.html"
   },
   "permissions": [
-    "contentSettings"
+    "contentSettings",
+    "storage"
   ],
   "host_permissions": ["https://www.bbc.com/"],
   "content_scripts": [

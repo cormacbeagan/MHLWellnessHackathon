@@ -20,7 +20,7 @@ chrome.extension.sendMessage({label: 'page-still-loading'}, function(response) {
      })
      headlineTexts.forEach((headline) =>{
        const intensity = vader.SentimentIntensityAnalyzer.polarity_scores(headline);
-       console.log(intensity);
+       // console.log(intensity);
       //  console.log(headline, `score: ${intensity.compound}`);
      })
      
@@ -34,7 +34,7 @@ chrome.extension.sendMessage({label: 'page-still-loading'}, function(response) {
 
 
 const onLoadComplete = () => {
-	chrome.extension.sendMessage({label: 'load-complete'}, (response) => {console.log(response)})
+	chrome.extension.sendMessage({label: 'load-complete'}, (response) => {return})
 	return;
 }
 
@@ -49,3 +49,4 @@ const sendAnalysis = (data) => {
 	});
 };
 
+sendAnalysis([1,2,3])
