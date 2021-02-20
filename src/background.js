@@ -1,5 +1,7 @@
 const handleNewData = (data) => {
-	chrome.storage.local.set({data: data}, () => {
+	let events = chrome.sotage.local.get(['events'])
+	events.push(data);
+	chrome.storage.local.set({events: events}, () => {
 		console.log(`Saved ${data} to local storage`);
 	})
 	return 'New data handled successfully'
