@@ -1,15 +1,67 @@
-// if you checked "fancy-settings" in extensionizr.com, uncomment this lines
+let eventPipe = []
 
-// var settings = new Store("settings", {
-//     "sample_setting": "This is how you use Store.js to remember values"
-// });
+const saveToStorage = (event) => {
+	chrome.storage.local.get(['events'], (items) => {
+		// console.log('items', items);
+		// console.log('items.events', items.events);
+		let new_array = null;
+		if (items.events == null) {
+		    new_array = new Array(event);
+		} else {
+			new_array = items.events.concat(event)
+		}
 
-//example of using a message handler from the inject scripts
-chrome.extension.onMessage.addListener(function (
-  request,
-  sender,
-  sendResponse
-) {
-  chrome.pageAction.show(sender.tab.id);
-  sendResponse();
+		chrome.storage.local.set({'events': new_array}, () => {
+			// console.log(`Saved ${event} to local storage`);
+		})
+	});
+}
+
+const handleNewData = (data) => {
+	// console.log('Start of data handler', data)
+	eventPipe.push(data)
+	// console.log(eventPipe.length)
+	return 'New data handled successfully'
+}
+
+const receiveMessage = (message, sender, sendResponse) => {
+	switch (message.label) {
+		case 'analysis-result':
+			// console.log('analysis-result');
+			sendResponse(handleNewData(message.data));
+			break;
+		case 'load-complete':
+			chrome.storage.local.set({test: 'test'}, () => {
+				console.log('Set test data')
+			})
+			chrome.storage.local.get(['test'], (items) => {
+				console.log(items)
+			})
+			break;
+		case 'page-still-loading':
+			console.log('page-still-loading');
+			break;
+	default: 
+		sendResponse(Error('Unrecognised message label'))
+	}
+}
+
+const intervalID = setInterval(() => {
+	if (eventPipe.length > 0) {
+		saveToStorage(eventPipe.shift());
+	}
+}, 100)
+
+chrome.runtime.onMessage.addListener(receiveMessage);
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  for (var key in changes) {
+    var storageChange = changes[key];
+    console.log('Storage key "%s" in namespace "%s" changed. ' +
+                'Old value was "%s", new value is "%s".',
+                key,
+                namespace,
+                storageChange.oldValue,
+                storageChange.newValue);
+  }
 });
