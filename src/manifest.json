@@ -25,7 +25,15 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.bbc.co.uk/*"
+        "https://*/*"
+      ],
+      "js": [
+        "inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.bbc.com/*"
       ],
       "js": [
         "inject.js"
