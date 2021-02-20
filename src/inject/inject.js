@@ -85,7 +85,7 @@ chrome.extension.sendMessage(
                 timestamp: Date.now(),
                 text: object.text,
                 result: object.intensity,
-                domain: location,
+                domain,
               });
               paraObjects = paraObjects.filter((item) => item.id !== object.id);
             }
