@@ -21,3 +21,6 @@ const input = 'VADER is very smart, handsome, and funny';
 const intensity = vader.SentimentIntensityAnalyzer.polarity_scores(input);
 console.log('Short sample', intensity);
 ```
+
+## Webpack config credits
+https://krzysztofzuraw.com/blog/2020/setting-up-chrome-extension-dev
