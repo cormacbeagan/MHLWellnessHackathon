@@ -32,7 +32,7 @@ chrome.extension.sendMessage(
         // load each P tag and create an array of objects with intensity and position on the y axis
         const paragraphs = Array.from(document.querySelectorAll('p'));
         let paraObjects = [];
-        let objectsToSend = [];
+        const domain = window.location.href;
 
         if (paragraphs.length > 0) {
           paraObjects = paragraphs.map((para, index) => {
@@ -55,12 +55,16 @@ chrome.extension.sendMessage(
           const bottom = top + window.innerHeight;
           paraObjects.map((object) => {
             if (object.offset < bottom && object.offset > top) {
-              objectsToSend.push(object);
+              sendAnalysis({
+                timestamp: Date.now(),
+                text: object.text,
+                result: object.intensity,
+                domain: location,
+              });
               paraObjects = paraObjects.filter((item) => item.id !== object.id);
             }
           });
         }
-
         window.addEventListener('scroll', debounce(handleScroll));
       }
     }, 10);
