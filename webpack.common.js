@@ -4,12 +4,22 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: { popup: './src/popup/index.js', background: './src/background.js', inject: './src/inject/inject.js' },
+  entry: {
+    popup: './src/popup/index.js',
+    background: './src/background.js',
+    inject: './src/inject/inject.js',
+  },
+  // todo babel plugin set up here under module: {rules:}
   module: {
-    rules: [{ test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ }], // do not forget to change/install your own TS loader
+    rules: [
+      {
+        test: /\.(css)$/,
+        use: ['style-loader'],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.js'],
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
@@ -18,6 +28,7 @@ module.exports = {
       patterns: [
         { from: './src/manifest.json' },
         { from: './src/icons/icon16.png' },
+        { from: './src/icons/icon19.png' },
         { from: './src/icons/icon48.png' },
         { from: './src/icons/icon128.png' },
       ],
