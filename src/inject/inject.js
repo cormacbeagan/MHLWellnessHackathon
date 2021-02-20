@@ -15,7 +15,12 @@ chrome.extension.sendMessage({}, function(response) {
      const headlineTexts = headlines.map((headline)=> {
        return headline.innerHTML
      })
-     console.log(headlineTexts);
+     headlineTexts.forEach((headline) =>{
+       const intensity = vader.SentimentIntensityAnalyzer.polarity_scores(headline);
+       console.log(intensity);
+      //  console.log(headline, `score: ${intensity.compound}`);
+     })
+     
     } else {
       console.log("nothing here");
     }
