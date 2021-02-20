@@ -1,4 +1,5 @@
 const vader = require('vader-sentiment');
+import './inject.css';
 
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
@@ -24,7 +25,7 @@ chrome.extension.sendMessage({}, function(response) {
     } else {
       console.log("nothing here");
     }
-
-	}
-	}, 10);
+      // ----------------------------------------------------------
+    }
+  }, 10);
 });
