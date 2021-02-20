@@ -1,13 +1,23 @@
-// if you checked "fancy-settings" in extensionizr.com, uncomment this lines
+const handleNewData = (data) => {
+	console.log(data);
+	return 'New data handled successfully'
+}
 
-// var settings = new Store("settings", {
-//     "sample_setting": "This is how you use Store.js to remember values"
-// });
+const receiveMessage = (message, sender, sendResponse) => {
+	switch (message.label) {
+		case 'analysis-result':
+			console.log('analysis-result');
+			sendResponse(handleNewData(message.data));
+			break;
+		case 'load-complete':
+			sendResponse('Thanks.');
+			break;
+		case 'page-still-loading':
+			console.log('page-still-loading');
+			break;
+	default: 
+		sendResponse(Error('Unrecognised message label'))
+	}
+}
 
-
-//example of using a message handler from the inject scripts
-chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
-  });
+chrome.runtime.onMessage.addListener(receiveMessage);
