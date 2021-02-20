@@ -3,7 +3,7 @@
  **/
 .my-popup {
   height: 80px;
-  width: 50px;
+  width: 80px;
   background-color: lightseagreen;
   /* border: 1px solid lightgray ; */
   border-radius: 5px;
@@ -11,14 +11,23 @@
   position: fixed;
   right: 0px;
   bottom: 0px;
+  z-index: 99;
   /* background-color: green; */
 }
 .my-popup:hover {
-  width: 200px;
+  height: 200px;
 }
+/* li {
+  height: 10px;
+} */
 .positive {
   display: block;
   background-color: lightskyblue;
+  border-radius: 5px;
+  height: 15px;
+}
+.positive:hover {
+  height: 30px;
 }
 .negative {
   display: block;

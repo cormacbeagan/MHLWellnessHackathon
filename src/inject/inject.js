@@ -42,7 +42,21 @@ popup.appendChild(innerDiv)
 const body = document.getElementsByTagName('body');
 body[0].appendChild(popup)
 
-positive.onclick = function() {console.log("I've been clicked - I feel positive");}
+const sendFeelings = (feeling) => {
+  const message = {
+    label: 'reader-feelings',
+    data: feeling,
+  };
+  chrome.runtime.sendMessage(message, function (response) {
+    console.log(response);
+  });
+};
+
+positive.onclick = function() {
+  console.log("I've been clicked - I feel positive");
+  sendFeelings("positive")
+}
+
 negative.onclick = function() {console.log("I've been clicked - I feel negative");}
 
 chrome.extension.sendMessage(
