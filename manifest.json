@@ -20,14 +20,19 @@
     "default_title": "browser action demo",
     "default_popup": "src/browser_action/browser_action.html"
   },
-  "permissions": [
-    "contentSettings"
-  ],
-  "host_permissions": ["https://www.bbc.com/"],
+
   "content_scripts": [
     {
       "matches": [
-        "https://www.google.com/*"
+        "https://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/ines/spacy-js"
       ],
       "css": [
         "src/inject/inject.css"
