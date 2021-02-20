@@ -56,12 +56,6 @@ const receiveMessage = (message, sender, sendResponse) => {
 			sendResponse(handleNewData(message.data));
 			break;
 		case 'load-complete':
-			chrome.storage.local.set({test: 'test'}, () => {
-				console.log('Set test data')
-			})
-			chrome.storage.local.get(['test'], (items) => {
-				console.log(items)
-			})
 			break;
 		case 'page-still-loading':
 			console.log('page-still-loading');
