@@ -1,11 +1,80 @@
+html {
+  border-radius: 20px;
+  box-shadow: 0 20 30 black;
+}
+
 .mainPopup {
   padding: 10px;
-  height: 200px;
-  width: 400px;
-  font-family: Helvetica, Ubuntu, Arial, sans-serif;
+  height: 300px;
+  width: 250px;
+  font-family: Arial, Helvetica, Ubuntu, sans-serif;
+  --neutral: rgb(83, 122, 145);
+  --positive: rgb(1, 151, 13);
+  --negative: rgb(133, 8, 8);
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.5rem;
 }
 
 h1 {
-  font-size: 2em;
-  color: red;
+  font-size: 1.5rem;
+  color: var(--color);
+}
+
+p {
+  margin: 0;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  margin: 0;
+}
+
+.pie-chart {
+  height: 150px;
+  width: 150px;
+  margin: 10px auto;
+  position: relative;
+  background: conic-gradient(var(--negative), var(--neutral), var(--positive));
+  transform: rotate(45deg);
+  border-radius: 100%;
+}
+
+.pie-chart.inner {
+  height: 75px;
+  width: 75px;
+  margin: 37.5px 37.5px;
+  background: white;
+  position: absolute;
+}
+
+.percent {
+  margin: 5px;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.percent p {
+  margin: 11px 0;
+}
+
+.negative {
+  background: var(--negative);
+}
+
+.positive {
+  background: var(--positive);
+}
+
+.neutral {
+  background: var(--neutral);
 }
