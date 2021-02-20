@@ -88,4 +88,3 @@ const sendAnalysis = (data) => {
   });
 };
 
-sendAnalysis([1, 2, 3]);
