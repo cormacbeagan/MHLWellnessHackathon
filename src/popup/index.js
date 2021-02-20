@@ -32,11 +32,13 @@ const addResults = (r1, r2)=> {
 	if (r1.pos == null) {
 		console.log('r1 was null', r1)
 		result = r2;
+		result.count = 1;
 	} else {
 		result.compound = (r1.compound + r2.compound);
 		result.neg = (r1.neg + r2.neg);
 		result.neu = (r1.neu + r2.neu);
 		result.pos = (r1.pos + r2.pos);
+		result.count = r1.count + 1;
 	}
 	return result;
 }
