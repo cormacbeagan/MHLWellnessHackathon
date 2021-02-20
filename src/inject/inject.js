@@ -17,6 +17,34 @@ function debounce(func, wait = 20, immediate = true) {
   };
 }
 
+const popup = document.createElement('div')
+popup.classList.add('my-popup')
+popup.onmouseover = function() {
+  console.log("mouseover");
+
+  popup.classList.add('expand')
+}
+popup.onmouseleave = function() {
+  popup.classList.remove('expand')
+}
+const innerDiv = document.createElement('ul')
+const positive = document.createElement('li')
+positive.classList.add('positive')
+const posText = document.createTextNode("positive")
+positive.appendChild(posText)
+innerDiv.appendChild(positive)
+const negative = document.createElement('li')
+negative.classList.add('negative')
+const negText = document.createTextNode("really negative")
+negative.appendChild(negText)
+innerDiv.appendChild(negative)
+popup.appendChild(innerDiv)
+const body = document.getElementsByTagName('body');
+body[0].appendChild(popup)
+
+positive.onclick = function() {console.log("I've been clicked - I feel positive");}
+negative.onclick = function() {console.log("I've been clicked - I feel negative");}
+
 chrome.extension.sendMessage(
   { label: 'page-still-loading' },
   function (response) {
@@ -28,33 +56,7 @@ chrome.extension.sendMessage(
         // This part of the script triggers when page is done loading
         console.log('Page loaded');
         // ----------------------------------------------------------
-        const popup = document.createElement('div')
-        popup.classList.add('my-popup')
-        popup.onmouseover = function() {
-          console.log("mouseover");
-    
-          popup.classList.add('expand')
-        }
-        popup.onmouseleave = function() {
-          popup.classList.remove('expand')
-        }
-        const innerDiv = document.createElement('ul')
-        const positive = document.createElement('li')
-        positive.classList.add('positive')
-        const posText = document.createTextNode("positive")
-        positive.appendChild(posText)
-        innerDiv.appendChild(positive)
-        const negative = document.createElement('li')
-        negative.classList.add('negative')
-        const negText = document.createTextNode("negative")
-        negative.appendChild(negText)
-        innerDiv.appendChild(negative)
-        popup.appendChild(innerDiv)
-        const body = document.getElementsByTagName('body');
-        body[0].appendChild(popup)
-        
-        positive.onclick = function() {console.log("I've been clicked - I feel positive");}
-        negative.onclick = function() {console.log("I've been clicked - I feel negative");}
+      
         // load each P tag and create an array of objects with intensity and position on the y axis
         const paragraphs = Array.from(document.querySelectorAll('p'));
         let paraObjects = [];

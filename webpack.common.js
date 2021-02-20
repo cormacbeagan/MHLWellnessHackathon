@@ -23,7 +23,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-    new HtmlWebpackPlugin({ template: 'src/popup/index.html' }),
+    new HtmlWebpackPlugin({ 
+      template: 'src/popup/index.html',
+      inject: false
+     }),
     new CopyWebpackPlugin({
       patterns: [
         { from: './src/manifest.json' },
@@ -31,7 +34,6 @@ module.exports = {
         { from: './src/icons/icon19.png' },
         { from: './src/icons/icon48.png' },
         { from: './src/icons/icon128.png' },
-        { from: './src/ui/reaction.html' },
       ],
     }),
   ],
