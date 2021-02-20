@@ -1,6 +1,27 @@
 /**
  * Place your custom CSS styles here.
  **/
-div {
+.my-popup {
+  height: 80px;
+  width: 50px;
+  background-color: lightseagreen;
+  /* border: 1px solid lightgray ; */
+  border-radius: 5px;
+  box-shadow: 5px 10px;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
   /* background-color: green; */
 }
+.my-popup:hover {
+  width: 200px;
+}
+.positive {
+  display: block;
+  background-color: lightskyblue;
+}
+.negative {
+  display: block;
+  background-color: lightsalmon;
+}
+
