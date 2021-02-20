@@ -2,8 +2,21 @@ import './popup.css';
 
 const deleteButton = document.getElementById('delete-local-storage');
 
+const positive = document.getElementById('');
+
+let data;
+function handleLoad() {
+  chrome.storage.local.get('events', (resp) => {
+    data = resp;
+  });
+}
+
+window.onload = handleLoad;
+
 const clearLocalStorage = () => {
-  chrome.storage.local.get('data', (resp) => console.log(resp));
+  console.log(data);
+  console.log(window);
+
   //chrome.storage.local.clear();
 };
 
