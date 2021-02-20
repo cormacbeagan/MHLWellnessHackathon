@@ -39,8 +39,10 @@ const negText = document.createTextNode("really negative")
 negative.appendChild(negText)
 innerDiv.appendChild(negative)
 popup.appendChild(innerDiv)
+
 const body = document.getElementsByTagName('body');
 body[0].appendChild(popup)
+
 
 const sendFeelings = (feeling) => {
   const message = {

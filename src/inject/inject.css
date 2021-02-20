@@ -2,33 +2,39 @@
  * Place your custom CSS styles here.
  **/
 .my-popup {
-  height: 80px;
-  width: 80px;
+  margin: 1rem;
+  padding: 1rem;
+  height: 60px;
+  width: 60px;
   background-color: lightseagreen;
   /* border: 1px solid lightgray ; */
-  border-radius: 5px;
-  box-shadow: 5px 10px;
+  border-radius: 30px 30px;
   position: fixed;
   right: 0px;
   bottom: 0px;
   z-index: 99;
   /* background-color: green; */
+  box-shadow: 0px 4px 8px silver;
+  transition: height 250ms;
+  display: flex;
+  flex-direction: column;
 }
+
 .my-popup:hover {
-  height: 200px;
+
 }
-/* li {
-  height: 10px;
-} */
+
+.my-popup.expand {
+  height: 240px;
+}
+
 .positive {
   display: block;
   background-color: lightskyblue;
   border-radius: 5px;
   height: 15px;
 }
-.positive:hover {
-  height: 30px;
-}
+
 .negative {
   display: block;
   background-color: lightsalmon;
