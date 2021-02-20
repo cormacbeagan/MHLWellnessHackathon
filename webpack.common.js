@@ -28,6 +28,7 @@ module.exports = {
       patterns: [
         { from: './src/manifest.json' },
         { from: './src/icons/icon16.png' },
+        { from: './src/icons/icon19.png' },
         { from: './src/icons/icon48.png' },
         { from: './src/icons/icon128.png' },
       ],
