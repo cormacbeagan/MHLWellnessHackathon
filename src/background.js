@@ -13,7 +13,3 @@ chrome.extension.onMessage.addListener(function (
   chrome.pageAction.show(sender.tab.id);
   sendResponse();
 });
-
-const paras = document.querySelectorAll('p');
-
-console.log(paras);
