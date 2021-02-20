@@ -1,52 +1,91 @@
 const vader = require('vader-sentiment');
 import './inject.css';
 
-chrome.extension.sendMessage({label: 'page-still-loading'}, function(response) {
-	var readyStateCheckInterval = setInterval(function() {
-	if (document.readyState === "complete") {
-		clearInterval(readyStateCheckInterval);
-
-		// ----------------------------------------------------------
-		// This part of the script triggers when page is done loading
-		console.log("Hello. This message was sent from scripts/inject.js");
-		// ----------------------------------------------------------
-		onLoadComplete();
-		
-    const headlines = Array.from(document.getElementsByClassName("gs-c-promo-heading__title"))
-
-    if(headlines.length > 0) {
-     const headlineTexts = headlines.map((headline)=> {
-       return headline.innerHTML
-     })
-     headlineTexts.forEach((headline) =>{
-       const intensity = vader.SentimentIntensityAnalyzer.polarity_scores(headline);
-       // console.log(intensity);
-      //  console.log(headline, `score: ${intensity.compound}`);
-     })
-     
-    } else {
-      console.log("nothing here");
-    }
-      // ----------------------------------------------------------
-    }
-  }, 10);
-});
-
-
-const onLoadComplete = () => {
-	chrome.extension.sendMessage({label: 'load-complete'}, (response) => {return})
-	return;
+function debounce(func, wait = 20, immediate = true) {
+  var timeout;
+  return function () {
+    var context = this,
+      args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
 }
 
+chrome.extension.sendMessage(
+  { label: 'page-still-loading' },
+  function (response) {
+    var readyStateCheckInterval = setInterval(function () {
+      if (document.readyState === 'complete') {
+        clearInterval(readyStateCheckInterval);
 
-const sendAnalysis = (data) => {
-	const message = {
-		label: 'analysis-result',
-		data: data
-	}
-	chrome.runtime.sendMessage(message, function(response) {
-		console.log(response)
-	});
+        // ----------------------------------------------------------
+        // This part of the script triggers when page is done loading
+        console.log('Page loaded');
+        // ----------------------------------------------------------
+
+        // load each P tag and create an array of objects with intensity and position on the y axis
+        const paragraphs = Array.from(document.querySelectorAll('p'));
+        let paraObjects = [];
+        const domain = window.location.href;
+
+        if (paragraphs.length > 0) {
+          paraObjects = paragraphs.map((para, index) => {
+            return {
+              id: index,
+              text: para.innerText,
+              offset: para.offsetTop,
+              intensity: vader.SentimentIntensityAnalyzer.polarity_scores(
+                para.innerText
+              ),
+            };
+          });
+          handleScroll();
+        } else {
+          console.log('nothing here');
+        }
+
+        function handleScroll() {
+          const top = window.scrollY;
+          const bottom = top + window.innerHeight;
+          paraObjects.map((object) => {
+            if (object.offset < bottom && object.offset > top) {
+              sendAnalysis({
+                timestamp: Date.now(),
+                text: object.text,
+                result: object.intensity,
+                domain: location,
+              });
+              paraObjects = paraObjects.filter((item) => item.id !== object.id);
+            }
+          });
+        }
+        window.addEventListener('scroll', debounce(handleScroll));
+      }
+    }, 10);
+  }
+);
+
+const onLoadComplete = () => {
+  chrome.extension.sendMessage({ label: 'load-complete' }, (response) => {
+    return;
+  });
+  return;
 };
 
-sendAnalysis([1,2,3])
+const sendAnalysis = (data) => {
+  const message = {
+    label: 'analysis-result',
+    data: data,
+  };
+  chrome.runtime.sendMessage(message, function (response) {
+    console.log(response);
+  });
+};
+
+sendAnalysis([1, 2, 3]);
