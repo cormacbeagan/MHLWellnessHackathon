@@ -33,8 +33,15 @@ const addResults = (r1, r2)=> {
 		console.log('r1 was null', r1)
 		result = r2;
 		result.count = 1;
+		result.compound_positive = 0;
+		result.compound_negative = 0;
 	} else {
 		result.compound = (r1.compound + r2.compound);
+		if (r2.compound > 0) {
+			result.compound_positive = r1.compound_positive + r2.compound
+		} else {
+			result.compound_negative = r1.compound_negative + r2.compound
+		}
 		result.neg = (r1.neg + r2.neg);
 		result.neu = (r1.neu + r2.neu);
 		result.pos = (r1.pos + r2.pos);
