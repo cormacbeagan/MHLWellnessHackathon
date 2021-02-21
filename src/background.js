@@ -44,6 +44,7 @@ const handleNewData = (data) => {
 
 const handleNewFeeling = (feeling) => {
 	// console.log('Start of data handler', data)
+	console.log(feeling);
 	readerFeelings.push(feeling)
 	// console.log(eventPipe.length)
 	return 'New data handled successfully'
