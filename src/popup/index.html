@@ -5,13 +5,48 @@
   <div class="charts">
     <div class="percent positive">
       <div class="rating">Positive <span id="posRating">33%</span></div>
+      <div class="para">
+        <div class="arrow"></div>
+        <p>Some text about reading positive news etc. 123</p>
+      </div>
     </div>
     <div class="pie-chart">
       <div class="inner"></div>
     </div>
     <div class="percent negative">
       <div class="rating"><span id="negRating">50%</span> Negative</div>
+      <div class="para">
+        <div class="arrow"></div>
+        <p>Some text about reading positive news etc. 123</p>
+      </div>
     </div>
   </div>
-  <button id="delete">DELETE</button>
+  <div class="feelings-container">
+    <div class="stats">
+      <div class="stat">100%</div>
+      <div class="stat">50%</div>
+      <div class="stat">0%</div>
+    </div>
+    <div class="feelings">
+      <div class="feel smiling"></div>
+      <div class="feel neutral"></div>
+      <div class="feel smallFrown"></div>
+      <div class="feel disappointed"></div>
+      <div class="feel weary"></div>
+    </div>
+
+  </div>
+  <div class="emoji-cont">
+    <div class="emoji smile">🙂</div>
+    <div class="emoji neut">😐</div>
+    <div class="emoji disa">🙁</div>
+    <div class="emoji frown">😞</div>
+    <div class="emoji wear">😩</div>
+  </div>
+  <div class="time">
+    <h5>Session</h5>
+    <div class="time-display" >From: <span id="start"></span></div>
+    <div class="time-display" >To: <span id="end"></span></div>
+  </div>
+  <button class="btn" id="delete">REFRESH</button>
 </div>

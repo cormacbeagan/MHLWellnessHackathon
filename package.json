@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Chrome extension",
   "main": "webpack.common.js",
+  "dependencies": {
+    "dayjs": "^1.10.4"
+  },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^7.0.0",
