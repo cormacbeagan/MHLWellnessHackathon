@@ -30,5 +30,6 @@
   "bugs": {
     "url": "https://github.com/cormacbeagan/MHLWellnessHackathon/issues"
   },
-  "homepage": "https://github.com/cormacbeagan/MHLWellnessHackathon#readme"
+  "homepage": "https://github.com/cormacbeagan/MHLWellnessHackathon#readme",
+  "dependencies": {}
 }

@@ -30,12 +30,22 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: './src/manifest.json' },
-        { from: './src/icons/icon16.png' },
-        { from: './src/icons/icon19.png' },
-        { from: './src/icons/icon48.png' },
-        { from: './src/icons/icon128.png' },
+        { from: './src/icons/brain16.png' },
+        { from: './src/icons/brain19.png' },
+        { from: './src/icons/brain48.png' },
+        { from: './src/icons/brain128.png' },
+        { from: './src/icons/logo.svg' },
+        { from: './src/icons/emoji_1.svg' },
+        { from: './src/icons/emoji_2.svg' },
+        { from: './src/icons/emoji_3.svg' },
+        { from: './src/icons/emoji_4.svg' },
+        { from: './src/icons/emoji_5.svg' },
       ],
     }),
   ],
-  output: { filename: '[name].js', path: path.resolve(__dirname, 'dist') }, // chrome will look for files under dist/* folder
+  output: { 
+    filename: '[name].js', 
+    path: path.resolve(__dirname, 'dist'), // chrome will look for files under dist/* folder
+    publicPath: '/',
+  }
 };

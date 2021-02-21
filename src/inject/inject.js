@@ -39,10 +39,13 @@ popup.onmouseleave = function() {
 
 const noteDiv = document.createElement('div')
 noteDiv.classList.add('note')
-noteDiv.innerHTML = '&#x1F9E0';
+const brainImg = new Image();
+brainImg.src = chrome.runtime.getURL('logo.svg');
+noteDiv.appendChild(brainImg);
 popup.appendChild(noteDiv);
 
 const emotionButtonNames = ['1','2','3','4','5']
+const emotionButtonFileNames = ['emoji_1.svg','emoji_2.svg','emoji_3.svg','emoji_4.svg','emoji_5.svg']
 const emotionButtonEmojis = ['&#x1F642','&#x1F610','&#x1F641','&#x1F61E', '&#x1F629']
 const emotionButtonDescriptions = ['smiling','neutral','small-frown','disappointed', 'weary']
 
@@ -61,9 +64,14 @@ for (var i = 0; i < emotionButtonNames.length; i++) {
   const emDiv = document.createElement('div')
   emDiv.classList.add('emotion')
   emDiv.classList.add('hidden')
+
+  const emojiImg = new Image();
+  emojiImg.src = chrome.runtime.getURL(emotionButtonFileNames[i]);
+  emDiv.appendChild(emojiImg)
+
   emDiv.setAttribute('data-tooltip', emotionButtonDescriptions[i])
   emDiv.id = emotionButtonDescriptions[i];
-  emDiv.innerHTML = emotionButtonEmojis[i];
+  // emDiv.innerHTML = emotionButtonEmojis[i];
   emDiv.onclick = function (e) {
     sendFeelings(e.target.id);
   };

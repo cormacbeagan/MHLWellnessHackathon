@@ -5,16 +5,16 @@
   "description": "This extension was created with the awesome extensionizr.com",
   "homepage_url": "http://extensionizr.com",
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "16": "brain16.png",
+    "48": "brain48.png",
+    "128": "brain128.png"
   },
   "background": {
     "service_worker":
       "background.js"
   },
   "action": {
-    "default_icon": "icon19.png",
+    "default_icon": "brain19.png",
     "default_title": "browser action demo",
     "default_popup": "index.html"
   },
@@ -43,7 +43,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["reaction.html"],
+      "resources": ["logo.svg", "emoji_1.svg", "emoji_2.svg", "emoji_3.svg", "emoji_4.svg", "emoji_5.svg"],
       "matches": []
     }
   ]
