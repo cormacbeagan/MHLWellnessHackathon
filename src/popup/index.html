@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 
 <div class="mainPopup">
+  <header class="header"><h1>Negativity Score</h1></header>
   <div class="charts">
-    <div class="pie-chart">
-      <div class="pie-chart inner"></div>
+    <div class="percent positive">
+      <div class="rating">Positive <span id="posRating">33%</span></div>
     </div>
-    <div>
-      <div class="percent negative">
-        <div class="rating" id="negRating">33%</div>
-      </div>
-      <div class="percent positive">
-        <div class="rating" id="posRating">33%</div>
-      </div>
-      <div class="percent neutral">
-        <div class="rating" id="neuRating">33%</div>
-      </div>
-      <div class="compound-score" id="compound"></div>
+    <div class="pie-chart">
+      <div class="inner"></div>
+    </div>
+    <div class="percent negative">
+      <div class="rating"><span id="negRating">50%</span> Negative</div>
     </div>
   </div>
-  <p>Session ratings</p>
-  <h1>Negativity Score</h1>
-  <button id="delete-local-storage">DELETE LOCAL DATA!</button>
+  <button id="delete">DELETE</button>
 </div>

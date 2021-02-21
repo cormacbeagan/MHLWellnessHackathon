@@ -1,29 +1,33 @@
 import './popup.css';
 
-const deleteButton = document.getElementById('delete-local-storage');
+const deleteButton = document.getElementById('delete');
 
 const positive = document.getElementById('posRating');
-const neutral = document.getElementById('neuRating');
 const negative = document.getElementById('negRating');
 const compound = document.getElementById('compound');
 const pieChart = document.querySelector('.pie-chart');
 
-let summary = {};
+let summary = {
+  compound: 0,
+  pos: 0,
+  neg: 0,
+  neu: 0,
+  compound_positive: 0,
+  compound_negative: 0,
+  count: 0,
+};
 
-const addResults = (r1, r2) => {
-  let result = {};
-  if (r1.pos == null) {
-    console.log('r1 was null', r1);
-    result = r2;
-    result.count = 1;
+const addResults = (event) => {
+  summary.compound += event.compound;
+  if (event.compound > 0) {
+    summary.compound_positive += event.compound;
   } else {
-    result.compound = r1.compound + r2.compound;
-    result.neg = r1.neg + r2.neg;
-    result.neu = r1.neu + r2.neu;
-    result.pos = r1.pos + r2.pos;
-    result.count = r1.count + 1;
+    summary.compound_negative += event.compound;
   }
-  return result;
+  summary.neg += event.neg;
+  summary.neu += event.neu;
+  summary.pos += event.pos;
+  summary.count += 1;
 };
 
 const summarizeEvents = () => {
@@ -35,7 +39,7 @@ const summarizeEvents = () => {
 const sumUp = (events) => {
   console.log(events);
   for (var i = 0; i < events.length; i++) {
-    summary = addResults(summary, events[i].result);
+    addResults(events[i].result);
   }
 };
 const clearLocalStorage = () => {
@@ -44,22 +48,21 @@ const clearLocalStorage = () => {
 };
 
 function handleLoaded() {
-  const posPerc = Math.round((summary.pos / summary.count) * 100);
-  const negPerc = Math.round((summary.neg / summary.count) * 100);
-  const neuPerc = Math.round((summary.neu / summary.count) * 100);
+  const total = summary.compound_positive + Math.abs(summary.compound_negative);
+  const compound_negative = Math.abs(
+    Math.round((summary.compound_negative / total) * 100)
+  );
+  const compound_positive = Math.round(
+    (summary.compound_positive / total) * 100
+  );
+  positive.innerText = compound_positive + '%';
+  negative.innerText = compound_negative + '%';
 
-  positive.innerText = posPerc + '%';
-  negative.innerText = negPerc + '%';
-  neutral.innerText = neuPerc + '%';
-  const posDeg = Math.round((posPerc / 100) * 360);
-  const negDeg = Math.round((posPerc / 100) * 360);
+  const posDeg = Math.round((compound_positive / 100) * 360);
+  const negDeg = Math.round((compound_negative / 100) * 360);
 
-  const gradient = `conic-gradient(var(--negative) ${negDeg}deg, var(--positive) ${negDeg}deg ${
-    posDeg + negDeg
-  }deg, var(--neutral) ${posDeg + negDeg}deg 360deg)`;
-  console.log(gradient);
+  const gradient = `conic-gradient(var(--negative) ${negDeg}deg, var(--positive) ${negDeg}deg 360deg)`;
   pieChart.style.background = gradient;
-  compound.innerText = summary.compound + ' ' + summary.count;
 }
 
 function handleLoad() {
