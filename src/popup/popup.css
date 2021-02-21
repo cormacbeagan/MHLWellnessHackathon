@@ -3,6 +3,8 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
   background: var(--white);
+  height: 500px;
+  width: 280px;
 }
 
 body {
@@ -11,21 +13,26 @@ body {
 
 .mainPopup {
   padding: 10px;
-  height: 350px;
-  width: 250px;
   font-family: Arial, Helvetica, Ubuntu, sans-serif;
   --neutral: rgb(83, 122, 145);
   --positive: rgb(211, 137, 41);
   --negative: rgb(19, 136, 187);
   --black: rgb(0, 0, 0);
-  --white: #e6e6e6;
+  --white: #fff;
+  --offWhite: rgba(219, 219, 219);
+  --grey: rgb(95, 99, 104);
   --bs: 0 3px 7px rgba(0, 0, 0, 0.1);
+  --seaGreen: lightseagreen;
 }
 
 h1 {
   font-size: 2.5rem;
   margin: 12px 25px;
   color: var(--black);
+}
+
+h5 {
+  margin: 0;
 }
 
 p {
@@ -52,7 +59,7 @@ p {
 
   position: relative;
   background: conic-gradient(var(--negative), var(--neutral), var(--positive));
-  transform: rotate(0deg);
+  transform: rotate(45deg);
   border-radius: 100%;
   box-shadow: var(--bs);
 }
@@ -90,24 +97,124 @@ p {
   margin: 0px auto;
 }
 
+.para {
+  background: var(--offWhite);
+  z-index: 1;
+  width: 250px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.positive .para {
+  margin-left: -10px;
+}
+
+.negative .para {
+  margin-top: -120px;
+  left: 10px;
+  text-align: left;
+}
+
+.arrow {
+  position: absolute;
+  transform: rotate(45deg);
+  width: 0;
+  height: 0;
+  background: var(--offWhite);
+  border: solid 7px;
+  border-color: var(--offWhite) transparent transparent var(--offWhite);
+}
+
+.positive .arrow {
+  top: -6px;
+  left: 20px;
+}
+
+.negative .arrow {
+  bottom: -6px;
+  right: 40px;
+}
+
+.percent .para {
+  position: fixed;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.percent:hover .para {
+  opacity: 1;
+}
+
+.feelings-container {
+  margin: 10px 0;
+  width: 80%;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+
+.stats {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stat {
+  margin: 3px;
+  text-align: right;
+  color: var(--negative);
+}
+
+.feelings {
+  width: 75%;
+  height: 100%;
+  border-bottom: 2px solid var(--grey);
+  border-left: 2px solid var(--grey);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.feel {
+  margin: 0 5px;
+  height: 50px;
+  width: 40px;
+  background: var(--seaGreen);
+}
+
+.emoji-cont {
+  height: 40px;
+  width: 75%;
+  margin-left: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.time {
+  margin-top: 0px;
+}
+
+.time-display span {
+  color: var(--positive);
+}
+
 .btn {
-  padding: 4px 10px;
+  padding: 8px 10px;
   border: none;
   border-radius: 10px;
   position: absolute;
-
-  background: grey;
-  color: white;
+  background: var(--seaGreen);
+  color: var(--white);
+  font-weight: bold;
   box-shadow: var(--bs);
 }
 
 #delete {
   bottom: 10px;
   right: 10px;
-}
-#refresh {
-  bottom: 10px;
-  right: 80px;
 }
 
 .btn:hover {
