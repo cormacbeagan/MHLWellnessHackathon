@@ -41,6 +41,8 @@ const noteDiv = document.createElement('div')
 noteDiv.classList.add('note')
 const brainImg = new Image();
 brainImg.src = chrome.runtime.getURL('logo.svg');
+brainImg.classList.add('svg')
+
 noteDiv.appendChild(brainImg);
 popup.appendChild(noteDiv);
 
@@ -67,6 +69,7 @@ for (var i = 0; i < emotionButtonNames.length; i++) {
 
   const emojiImg = new Image();
   emojiImg.src = chrome.runtime.getURL(emotionButtonFileNames[i]);
+  emojiImg.classList.add('svg')
   emDiv.appendChild(emojiImg)
 
   emDiv.setAttribute('data-tooltip', emotionButtonDescriptions[i])

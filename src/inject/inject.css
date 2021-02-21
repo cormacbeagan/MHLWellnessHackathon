@@ -46,8 +46,9 @@
   cursor: pointer;
 }
 
-.note > img {
+img.svg {
   transition: all 250ms;
+  max-width: 100%;
   padding: 0;
   margin: 0;
   top: 0;
