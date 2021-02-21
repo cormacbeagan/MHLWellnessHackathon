@@ -92,6 +92,7 @@ const sumUp = (events) => {
 };
 
 const sumUpFeelings = (feelings) => {
+  console.log(feelings);
   for (let i = 0; i < feelings.length; i++) {
     addFeelings(feelings[i]);
   }
@@ -111,14 +112,6 @@ const clearLocalStorage = () => {
   timeObj = {
     start: Date.now(),
     end: Date.now(),
-  };
-  feelings = {
-    smiling: 0,
-    neutral: 0,
-    smallFrown: 0,
-    disappointed: 0,
-    weary: 0,
-    total: 0,
   };
   handleLoad();
 };
@@ -152,6 +145,8 @@ function handleLoaded() {
   timeStart.innerText = start;
   timeEnd.innerText = dayjs(timeObj.end).format('ddd D MMM YYYY HH:mm');
   // producing the feelings graph
+
+  console.log(feelings);
   const smilingPerc = (feelings.smiling / feelings.total) * 100;
   const neutralPerc = (feelings.neutral / feelings.total) * 100;
   const disappointedPerc = (feelings.disappointed / feelings.total) * 100;
