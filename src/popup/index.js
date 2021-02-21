@@ -126,12 +126,13 @@ const clearLocalStorage = () => {
 function handleLoaded() {
   // producing the pie chart //
   const total = summary.compound_positive + Math.abs(summary.compound_negative);
-  const compound_negative = Math.abs(
+  let compound_negative = Math.abs(
     Math.round((summary.compound_negative / total) * 100)
   );
-  const compound_positive = Math.round(
-    (summary.compound_positive / total) * 100
-  );
+  let compound_positive = Math.round((summary.compound_positive / total) * 100);
+  if (isNaN(compound_negative)) compound_negative = 0;
+  if (isNaN(compound_positive)) compound_positive = 0;
+
   positive.innerText = compound_positive + '%';
   negative.innerText = compound_negative + '%';
 
@@ -141,11 +142,11 @@ function handleLoaded() {
   const gradient = `conic-gradient(var(--negative) ${negDeg}deg, var(--positive) ${negDeg}deg 360deg)`;
 
   const testGradient = `conic-gradient(var(--negative) ${
-    negDeg - 15
-  }deg, ${negDeg}deg, var(--positive) ${negDeg + 15}deg)`;
+    negDeg - 20
+  }deg, ${negDeg}deg, var(--positive) ${negDeg + 20}deg)`;
 
   const testTwoGradient = `conic-gradient(var(--negative), ${negDeg}deg, var(--positive)`;
-  pieChart.style.background = testTwoGradient;
+  pieChart.style.background = testGradient;
 
   const start = dayjs(timeObj.start).format('ddd D MMM YYYY HH:mm');
   timeStart.innerText = start;

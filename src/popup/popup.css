@@ -147,7 +147,7 @@ p {
 }
 
 .feelings-container {
-  margin: 10px 0;
+  margin: -28px 0 5px 0;
   width: 80%;
   height: 100px;
   display: grid;
@@ -185,12 +185,16 @@ p {
 }
 
 .emoji-cont {
-  height: 40px;
-  width: 75%;
-  margin-left: 44px;
+  height: 38px;
+  width: 80%;
+  margin-left: 42px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
+}
+
+.emoji-cont img {
+  margin: 3px;
 }
 
 .time {
