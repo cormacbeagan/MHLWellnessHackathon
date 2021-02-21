@@ -23,7 +23,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-    new HtmlWebpackPlugin({ template: 'src/popup/index.html' }),
+    new HtmlWebpackPlugin({ 
+      template: 'src/popup/index.html',
+      inject: false
+     }),
     new CopyWebpackPlugin({
       patterns: [
         { from: './src/manifest.json' },

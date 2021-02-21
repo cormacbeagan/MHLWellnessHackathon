@@ -17,6 +17,64 @@ function debounce(func, wait = 20, immediate = true) {
   };
 }
 
+const popup = document.createElement('div')
+popup.classList.add('my-popup')
+popup.onmouseover = function() {
+  console.log("mouseover");
+  popup.classList.add('expand')
+  for (var i = 0; i < popup.children.length; i++) {
+    popup.children[i].classList.remove('hidden')
+  }
+  noteDiv.classList.add('hidden')
+}
+
+popup.onmouseleave = function() {
+  popup.classList.remove('expand')
+  for (var i = 0; i < popup.children.length; i++) {
+    popup.children[i].classList.add('hidden')
+  }
+  noteDiv.classList.remove('hidden')
+
+}
+
+const noteDiv = document.createElement('div')
+noteDiv.classList.add('note')
+noteDiv.innerHTML = '&#x1F9E0';
+popup.appendChild(noteDiv);
+
+const emotionButtonNames = ['1','2','3','4','5']
+const emotionButtonEmojis = ['&#x1F642','&#x1F610','&#x1F641','&#x1F61E', '&#x1F629']
+const emotionButtonDescriptions = ['smiling','neutral','small-frown','disappointed', 'weary']
+
+const sendFeelings = (feeling) => {
+  console.log(feeling);
+  const message = {
+    label: 'reader-feelings',
+    data: feeling,
+  };
+  chrome.runtime.sendMessage(message, function (response) {
+    console.log(response);
+  });
+};
+
+for (var i = 0; i < emotionButtonNames.length; i++) {
+  const emDiv = document.createElement('div')
+  emDiv.classList.add('emotion')
+  emDiv.classList.add('hidden')
+  emDiv.setAttribute('data-tooltip', emotionButtonDescriptions[i])
+  emDiv.id = emotionButtonDescriptions[i];
+  emDiv.innerHTML = emotionButtonEmojis[i];
+  emDiv.onclick = function (e) {
+    sendFeelings(e.target.id);
+  };
+  popup.appendChild(emDiv);
+}
+
+
+const body = document.getElementsByTagName('body');
+body[0].appendChild(popup)
+
+
 chrome.extension.sendMessage(
   { label: 'page-still-loading' },
   function (response) {
@@ -28,7 +86,7 @@ chrome.extension.sendMessage(
         // This part of the script triggers when page is done loading
         console.log('Page loaded');
         // ----------------------------------------------------------
-
+      
         // load each P tag and create an array of objects with intensity and position on the y axis
         const paragraphs = Array.from(document.querySelectorAll('p'));
         let paraObjects = [];

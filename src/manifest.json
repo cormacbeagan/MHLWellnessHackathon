@@ -40,5 +40,11 @@
         "inject.js"
       ]
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["reaction.html"],
+      "matches": []
+    }
   ]
 }
