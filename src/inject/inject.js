@@ -87,13 +87,14 @@ for (var i = 0; i < emotionButtonNames.length; i++) {
   const emojiImg = new Image();
   emojiImg.src = chrome.runtime.getURL(emotionButtonFileNames[i]);
   emojiImg.classList.add('svg');
+  emojiImg.id = emotionButtonDescriptions[i];
   emDiv.appendChild(emojiImg);
 
   emDiv.setAttribute('data-tooltip', emotionButtonDescriptions[i]);
-  emDiv.id = emotionButtonDescriptions[i];
+  //emDiv.id = emotionButtonDescriptions[i];
   // emDiv.innerHTML = emotionButtonEmojis[i];
   emDiv.onclick = function (e) {
-    console.log(e.target, 'testing');
+    console.log(e, 'testing');
     sendFeelings(e.target.id);
   };
   popup.appendChild(emDiv);

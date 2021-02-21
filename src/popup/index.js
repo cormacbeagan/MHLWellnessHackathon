@@ -84,6 +84,7 @@ const summarizeFeelings = () => {
 };
 
 const sumUp = (events) => {
+  if (!events) return;
   for (var i = 0; i < events.length; i++) {
     if (i === 0) timeObj.start = events[i].timestamp;
     if (i === events?.length - 1) timeObj.end = events[i].timestamp;
@@ -93,6 +94,8 @@ const sumUp = (events) => {
 
 const sumUpFeelings = (feelings) => {
   console.log(feelings);
+
+  if (!feelings) return;
   for (let i = 0; i < feelings.length; i++) {
     addFeelings(feelings[i]);
   }
@@ -146,12 +149,14 @@ function handleLoaded() {
   timeEnd.innerText = dayjs(timeObj.end).format('ddd D MMM YYYY HH:mm');
   // producing the feelings graph
 
-  console.log(feelings);
   const smilingPerc = (feelings.smiling / feelings.total) * 100;
   const neutralPerc = (feelings.neutral / feelings.total) * 100;
   const disappointedPerc = (feelings.disappointed / feelings.total) * 100;
   const smallFrownPerc = (feelings.smallFrown / feelings.total) * 100;
   const wearyPerc = (feelings.weary / feelings.total) * 100;
+  console.log(
+    wearyPerc + smilingPerc + neutralPerc + disappointedPerc + smallFrownPerc
+  );
   smiling.style.height = smilingPerc + 'px';
   neutral.style.height = neutralPerc + 'px';
   disappointed.style.height = disappointedPerc + 'px';
