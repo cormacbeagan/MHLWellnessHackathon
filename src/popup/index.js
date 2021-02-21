@@ -1,5 +1,4 @@
 import './popup.css';
-import dayjs from 'day-js';
 const deleteButton = document.getElementById('delete');
 const refreshButton = document.getElementById('refresh');
 
